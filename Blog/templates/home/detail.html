@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    details
+{% endblock %}
+
+{% block details %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ object.author }}</a>
+                <small class="text-muted">{{ object.data_field|date:"F d, Y" }}</small>
+            </div>
+            <h2 class="article-title">{{ object.title }}</h2>
+            <p class="article-content">{{ object.context }}</p>
+        </div>
+    </article>
+{% endblock %}

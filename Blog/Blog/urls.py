@@ -22,6 +22,10 @@ from users import views as user_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/',user_view.register,name='register'),
+    path('profile/',user_view.profile,name='profile'),
+    path('login/',user_view.LoginForm.as_view(),name='login'),
+    path('logout/',user_view.LogoutForm.as_view(),name='logout'),
     path('', include('bdBlog.urls'))
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

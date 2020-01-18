@@ -32,36 +32,54 @@
                 </ul>
                 <!-- Right nav -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item " style="font-size: 22px">
-                        <a class="nav-link nav-item  px-3 " href="#">Login</a>
-                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item " style="font-size: 22px">
+                            <a class="nav-link nav-item  px-3 " href="{% url 'profile' %}">Profile</a>
+                        </li>
+                        <li class="nav-item " style="font-size: 22px">
+                            <a class="nav-link nav-item  px-3 " href="{% url 'logout' %}">LogOut</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item " style="font-size: 22px">
+                            <a class="nav-link nav-item  px-3 " href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item " style="font-size: 22px">
+                            <a class="nav-link nav-item  px-3 " href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
         <br>
         <br>
-        
+        <div >
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
         <div class="container">
             {% block register %}
             
             {% endblock %}
         </div>
+        <div class="col-md-6 offset-md-3">
+            {% block details %}
+
+            {% endblock %}
+        </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <div class="alert alert-{{ message.tags }}">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                    {% block content %}
+                <div class="col-md-4">
+                    {% block second_content %}
 
                     {% endblock %}
                 </div>
-                <div class="col-md-4">
-                    {% block second_content %}
+                <div class="col-md-8">
+                    {% block content %}
 
                     {% endblock %}
                 </div>
