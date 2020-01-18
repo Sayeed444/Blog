@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    home
+    userPost
 {% endblock %}
 
-{% block content %}
+{% block details %}
+    <h1 class="mb-3">Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
     {% for post in posts %}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
@@ -36,21 +37,5 @@
             <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
             <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
         {% endif %}
-
     {% endif %}
-
-{% endblock %}
-
-{% block second_content %}
-    <div class="content-section">
-        <h3>Your Product</h3>
-        <p class="text-muted"> You can put may infomations</p>
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-light"> One To One </li>
-            <li class="list-group-item list-group-item-light"> One To Many </li>
-            <li class="list-group-item list-group-item-light"> Many To One </li>
-            <li class="list-group-item list-group-item-light"> Many To Many </li>
-            <li class="list-group-item list-group-item-light"> ETC </li>
-        </ul>
-    </div>
 {% endblock %}
